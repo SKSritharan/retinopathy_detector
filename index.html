@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/eye.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Diabetic Retinopathy Detector</title>
+
+  <!-- Google font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+  <!-- TensorFlow-->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.0.1"> </script>
+  <!-- TensorFlow pretrained model-->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@1.0.0"> </script>
+</head>
+
+<body class="bg-white dark:bg-gray-900 bg-[url('/bg.jpg')] bg-blend-color-dodge bg-cover bg-no-repeat">
+
+  <main>
+
+    <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12">
+      <h1
+        class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        Diabetic Retinopathy Detector</h1>
+      <p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">
+        Simply upload a photo, and our algorithms will analyze it to provide a prediction.
+      </p>
+
+      <div class="loader">
+        <h2
+          class="animate-pulse mb-6 font-light text-gray-900 dark:text-white md:text-lg grid h-screen place-items-center">
+          Please Wait, the image being on
+          process ...
+        </h2>
+      </div>
+
+      <section class="result hidden" id="result">
+        <div
+          class="gap-8 items-center py-8 px-4 mx-auto max-w-screen-xl xl:gap-16 md:grid md:grid-cols-2 sm:py-16 lg:px-6">
+
+          <figure
+            class="relative max-w-sm transition-all duration-300 cursor-pointer filter grayscale hover:grayscale-0">
+            <a href="#">
+              <section class="image-section">
+                <img class="rounded-lg" src="" id="image" />
+                <div class="image-prediction" id="prediction"></div>
+              </section>
+            </a>
+            <p id="prediction"></p>
+          </figure>
+
+          <div class="mt-4 md:mt-0">
+            <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white capitalize"
+              id="disease"></h2>
+            <p class="mb-6 font-light text-gray-500 md:text-lg dark:text-gray-400 text-left" id="description"></p>
+          </div>
+        </div>
+      </section>
+
+      <section class="file-section">
+        <div class="error mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg" id="input-error">An
+          error
+          occured. Is your file really an image ?
+        </div>
+        <div class="flex items-center justify-center w-full mb-3">
+          <label for="dropzone-file"
+            class="backdrop-blur-sm flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50/30 dark:hover:bg-gray-800/30 dark:bg-gray-700/30 hover:bg-gray-100/30 dark:border-gray-600 dark:hover:border-gray-500/30">
+            <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+              <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
+                  upload</span>
+                or drag and drop</p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+            </div>
+            <input id="dropzone-file" type="file" class="hidden" accept="image/*" />
+          </label>
+        </div>
+
+
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-16">
+          <div class="mx-auto max-w-screen-sm justify-center">
+            <svg class="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600" viewBox="0 0 24 27" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z"
+                fill="currentColor" />
+            </svg>
+            <p class="mb-6 font-light text-gray-500 dark:text-gray-400 md:text-lg">This app is designed to provide you
+              with predictions based on data sets and machine learning algorithms.
+
+              While we strive to ensure the accuracy of our predictions, we would like to emphasize that the
+              information
+              provided is for educational and informational purposes only. It should not be used as a substitute for
+              professional medical advice, diagnosis, or treatment.
+
+              Therefore, we strongly recommend that you consult a qualified healthcare professional if you have any
+              concerns
+              about your health, including potential fungal infections of the nail.</p>
+
+          </div>
+        </div>
+
+      </section>
+    </div>
+
+  </main>
+  <script type="module" src="./src/main.js"></script>
+</body>
+
+</html>
